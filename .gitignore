@@ -1,0 +1,23 @@
+# Python-generated files
+__pycache__/
+*.pyc
+*.py[cod]
+
+# Build / Distribution
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Virtual environments
+.venv
+/venv/
+.env
+
+# Logs and Caches
+*.log
+*.bak
+
+# IDE and Editor Files (Recommended)
+.vscode/
+.idea/
