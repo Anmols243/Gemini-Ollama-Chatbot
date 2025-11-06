@@ -1,6 +1,6 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_ollama import ChatOllama
 
 import streamlit as st
 import os
@@ -17,12 +17,10 @@ prompt=ChatPromptTemplate.from_messages(
     ]
 )
 
-st.title("LangChain with Gemini API")
+st.title("LangChain with llama2")
 input_text = st.text_input("Search the topic you want")
 
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=os.getenv("GEMINI_API_KEY"))
+llm = ChatOllama(model="llama2")
 output_parser = StrOutputParser()
 
 chain=prompt|llm|output_parser
