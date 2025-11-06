@@ -1,150 +1,138 @@
-🚀 Gemini-Ollama-Chatbot: Cloud and Local LLM 
+🚀 Gemini-Ollama-Chatbot: Cloud vs. Local LLM Demo
 
-This project demonstrates a fully functional, minimal chatbot built with LangChain and Streamlit. It features two separate implementations that share the same core logic: one using a powerful cloud API (Google Gemini) and another using a local, open-source model (Llama2 via Ollama).
+This project features a powerful, minimal chatbot built with LangChain and Streamlit. It provides two parallel implementations—one connecting to the Google Gemini cloud API and one using a local Llama2 model via Ollama—for comparing performance and cost.
 
-This setup is ideal for developers looking to compare cloud API performance, cost, and latency against private, local inference.
+This is a great starting point for developers (especially those skilled in Python/ML) looking to build scalable LLM applications.
 
-✨ Features
+✨ Key Features
 
-Dual Implementation: Separate Streamlit apps for Gemini and Ollama.
+Dual Implementation: Separate Streamlit apps (gemini_app.py and llamaapp.py) for easy A/B testing of LLMs.
 
-LangChain Expression Language (LCEL): Efficient and modern chain setup.
+Core Logic: Uses LangChain Expression Language (LCEL) for efficient, readable model orchestration.
 
-Secure Secrets Management: Uses .env and .gitignore to protect API keys.
+Secure Secrets: Utilizes .env and .gitignore to securely manage all API keys.
 
-Robust Environment: Uses Conda for clean, centralized environment management.
+Clean Environment: Managed centrally using Conda to prevent dependency conflicts.
 
-Tracing Enabled: Configured for tracing via LangSmith for debugging and performance analysis.
+Tracing Enabled: Configured for debugging and monitoring via LangSmith (optional).
 
-🛠️ Tech Stack
+🛠️ Project Stack
 
 Component
 
 Technology
 
+Model / Tool
+
 Purpose
 
 Framework
 
-LangChain (Python)
+Python / LangChain
+
+LCEL
 
 Orchestration and model chaining.
 
 Cloud LLM
 
+langchain_google_genai
+
 Gemini 2.5 Flash
 
-High-speed, cost-effective cloud model.
+High-speed, cost-effective cloud solution.
 
 Local LLM
 
+langchain_ollama
+
 Llama2
 
-Privacy-focused, zero-cost model via Ollama.
+Private, zero-cost local inference.
 
 Frontend
 
 Streamlit
 
+
+
 Interactive web interface.
 
-Dependency Mgmt
+Environment
 
-Conda (Recommended)
+Conda
 
-Centralized, clean, and robust environment isolation.
 
-⚙️ Local Setup Instructions
+
+Centralized environment management.
+
+⚙️ Local Setup and Installation
 
 Prerequisites
 
 Conda/Miniconda installed.
 
-Python 3.10+ installed.
-
 Git installed.
 
-Ollama Application: Download and install Ollama to run the local LLM.
+Ollama Application: Download and install Ollama.
 
-Step 1: Clone the Repository
+Step 1: Clone and Prepare
 
+# 1. Clone the repository (Use the correct URL from GitHub)
 git clone [https://github.com/Anmols243/Gemini-Ollama-Chatbot.git](https://github.com/Anmols243/Gemini-Ollama-Chatbot.git)
 cd Gemini-Ollama-Chatbot
 
 
 Step 2: Set Up Environment with Conda
 
-We will create a clean, central environment and install all dependencies (Gemini, Streamlit, Ollama) into it.
+We create one clean, central environment and install all dependencies:
 
-Create the Environment:
-
+# 1. Create environment
 conda create --name langchain-dev python=3.10 pip
 
-
-Activate the Environment:
-
+# 2. Activate environment
 conda activate langchain-dev
 
-
-Install dependencies:
-
+# 3. Install dependencies from requirements.txt
 pip install -r requirements.txt
 
 
-Step 3: Configure Secrets and API Keys
+Step 3: Configure Secrets (.env File)
 
-Create a file named .env in the root directory.
+Create a file named .env in the project's root directory.
 
-Obtain your API keys and paste them into the .env file:
+Obtain your keys and paste them into the .env file:
 
-Variable
+# Required for Google Gemini API Access
+GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
 
-Value Source
+# Required for LangSmith Tracing (Optional for viewing logs)
+LANGSMITH_TRACING=true
+LANGSMITH_ENDPOINT=[https://api.smith.langchain.com](https://api.smith.langchain.com)
+LANGSMITH_API_KEY="ls__YOUR_LANGSMITH_KEY_HERE"
+LANGSMITH_PROJECT=Chatbot-Dual-LLM
 
-Purpose
 
-GEMINI_API_KEY
+🚀 Running the Applications
 
-Get key from Google AI Studio
+Option A: Gemini (Cloud) Chatbot
 
-Runs the cloud model (gemini_app.py).
+Runs the cloud-based LLM via Google's API.
 
-LANGSMITH_API_KEY
-
-Get key from LangSmith Settings
-
-Enables application tracing (optional).
-
-LANGSMITH_TRACING
-
-true
-
-Enables tracing for all runs.
-
-LANGSMITH_PROJECT
-
-Chatbot-Dual-LLM
-
-Project name for LangSmith tracking.
-
-Step 4: Run the Applications
-
-A. Run the Gemini (Cloud) App:
-
-Ensure the langchain-dev environment is active, and launch the file:
-
+conda activate langchain-dev
 streamlit run chatbot/gemini_app.py
 
 
-B. Run the Ollama (Local) App:
+Option B: Ollama (Local) Chatbot
 
-Pull the Model: Open a separate terminal and ensure the model is downloaded locally:
+Runs the local Llama2 model.
+
+Pull the Model:
 
 ollama pull llama2
 
 
-Start the Server: Ensure the Ollama server is running (usually automatic after installation).
-
 Launch the App:
 
+conda activate langchain-dev
 streamlit run chatbot/llamaapp.py
